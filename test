@@ -1,0 +1,522 @@
+<style>
+  /* ===== STUDIO Embed Scoped CSS ===== */
+  #lp{font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic","Meiryo",sans-serif; color:#0f172a; line-height:1.85; letter-spacing:.01em;}
+  #lp *{box-sizing:border-box}
+  #lp a{color:inherit; text-decoration:none}
+
+  #lp .wrap{max-width:980px; margin:0 auto; padding:0 20px}
+  #lp section{padding:64px 0}
+  #lp .section-number{margin:0 0 10px; color:#94a3b8; font-weight:700; letter-spacing:.1em}
+  #lp .section-title{margin:0 0 16px; font-size:32px; line-height:1.35; letter-spacing:.02em; font-weight:900}
+  #lp .section-lead{margin:0 0 28px; color:#475569; font-size:16px}
+
+  #lp .card{background:#fff; border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 10px 28px rgba(15,23,42,.08)}
+  #lp .card2{background:#f8fafc; border:1px solid #e5e7eb; border-radius:16px}
+
+  /* HERO */
+  #lp .hero{padding:0; color:#fff; background:linear-gradient(180deg,#1f4a87 0%,#173a68 100%)}
+  #lp .hero-inner{max-width:980px; margin:0 auto; padding:56px 20px 64px; text-align:center}
+  #lp .hero-eyebrow{margin:0 0 24px; color:rgba(255,255,255,.85); font-weight:700; letter-spacing:.08em; font-size:14px}
+  #lp .hero-badge{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); font-weight:800; letter-spacing:.12em; font-size:12px; margin:0 0 24px}
+  #lp .hero-title{margin:0 0 18px; font-size:40px; line-height:1.35; letter-spacing:.02em; font-weight:900}
+  #lp .hero-lead{margin:0; color:rgba(255,255,255,.85); font-size:15px; line-height:1.95}
+
+  /* 01 Research */
+  #lp .research-card{margin-top:18px; padding:26px 26px 18px}
+  #lp .research-title{margin:0 0 6px; font-weight:900}
+  #lp .research-meta{margin:0 0 16px; color:#475569; font-size:14px}
+  #lp .research-question{margin:0 0 14px; font-weight:800}
+  #lp .research-result{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+  #lp .research-result li{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#f8fafc}
+  #lp .research-result strong{font-weight:900}
+  #lp .research-note{margin:14px 0 0; color:#475569; font-size:12px; text-align:right}
+  #lp .research-summary{margin-top:18px; color:#475569}
+  #lp .research-summary p{margin:0 0 12px}
+  #lp .research-summary p:last-child{margin:0}
+
+  /* 02 Stats */
+  #lp .era-text p{margin:0 0 14px; color:#475569}
+  #lp .era-stats{margin-top:22px; display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
+  #lp .stat-card{padding:22px 18px; text-align:center; border:1px solid #e5e7eb; border-radius:16px; background:#f8fafc}
+  #lp .stat-value{margin:0; font-size:34px; font-weight:900}
+  #lp .stat-label{margin:6px 0 0; color:#475569; font-size:13px; line-height:1.6}
+  #lp .era-note{margin:18px 0 0; color:#475569; font-size:12px}
+  #lp .era-message{margin-top:40px; text-align:center; color:#475569; font-weight:800}
+  #lp .era-message p{margin:0}
+
+  /* 03 Compare */
+  #lp .meaning-intro p{margin:0 0 12px; color:#475569}
+  #lp .meaning-compare{margin-top:20px; display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr))}
+  #lp .compare-card{padding:22px 20px; border:1px solid #e5e7eb; border-radius:16px; background:#f8fafc}
+  #lp .compare-card.highlight{background:#eef2ff; border-color:#c7d2fe}
+  #lp .compare-label{margin:0 0 6px; color:#64748b; font-weight:900; font-size:13px}
+  #lp .compare-title{margin:0 0 10px; font-size:18px; font-weight:900}
+  #lp .compare-text{margin:0; color:#475569}
+  #lp .meaning-note{margin-top:18px; color:#475569}
+  #lp .meaning-quote{margin-top:24px; padding:18px 18px; border-left:4px solid #cbd5e1; background:#f8fafc; border-radius:12px}
+  #lp .quote-strong{margin:0 0 10px; font-weight:900}
+
+  /* 04 Sand Box + Quote */
+  #lp .outsourcing-intro p{margin:0; color:#475569}
+  #lp .outsourcing-box{margin-top:20px; padding:18px 18px; border-left:4px solid #d6c8a8; background:#fbf7ef; border-radius:12px}
+  #lp .box-title{margin:0 0 10px; font-weight:900}
+  #lp .box-list{margin:0; padding-left:20px; color:#475569}
+  #lp .box-list li{margin:10px 0}
+  #lp .outsourcing-text{margin-top:18px; color:#475569}
+  #lp .outsourcing-text p{margin:0 0 12px}
+  #lp blockquote{margin:18px 0 0; padding:18px 18px; background:#f8fafc; border:1px solid #e5e7eb; border-radius:12px}
+  #lp blockquote p{margin:0 0 10px; color:#475569}
+  #lp blockquote cite{font-style:normal; color:#64748b; font-weight:800}
+
+  /* 05 Conditions */
+  #lp .conditions-list{display:grid; gap:14px}
+  #lp .condition-item{padding:18px 18px; border:1px solid #e5e7eb; border-radius:16px; background:#f8fafc}
+  #lp .condition-title{margin:0 0 8px; font-size:18px; font-weight:900}
+  #lp .condition-text{margin:0; color:#475569}
+  #lp .conditions-summary{margin:20px 0 0; color:#475569; font-weight:800}
+
+  /* 06 Case */
+  #lp .case-card{margin-top:18px; padding:22px 22px; border:1px solid #e5e7eb; border-radius:16px; background:#fff; box-shadow:0 10px 28px rgba(15,23,42,.08)}
+  #lp .case-label{margin:0 0 6px; color:#b09153; font-weight:900; letter-spacing:.12em; font-size:12px}
+  #lp .case-title{margin:0 0 14px; font-size:22px; font-weight:900}
+  #lp .case-text p{margin:0 0 12px; color:#475569}
+  #lp .case-stats{margin-top:14px; display:grid; gap:12px; grid-template-columns:repeat(3,minmax(0,1fr))}
+  #lp .case-stats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #lp .stat{padding:16px 14px; border:1px solid #e5e7eb; border-radius:14px; background:#f8fafc; text-align:center}
+  #lp .stat .stat-value{margin:0; font-size:28px; font-weight:900}
+  #lp .stat .stat-label{margin:6px 0 0; color:#475569; font-size:13px; line-height:1.6}
+
+  /* 07 Process */
+  #lp .process-steps{list-style:none; padding:0; margin:0; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 10px 28px rgba(15,23,42,.08)}
+  #lp .process-step{padding:18px 18px; display:grid; grid-template-columns:44px 1fr; gap:14px; border-top:1px solid #e5e7eb}
+  #lp .process-step:first-child{border-top:none}
+  #lp .step-number{width:38px; height:38px; border-radius:999px; background:#0b2a66; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900}
+  #lp .step-title{margin:0 0 6px; font-size:18px; font-weight:900}
+  #lp .step-text{margin:0; color:#475569}
+  #lp .process-info{margin-top:18px; padding:18px 18px; border-left:4px solid #d6c8a8; background:#fbf7ef; border-radius:12px; color:#475569}
+  #lp .process-info p{margin:0 0 8px}
+  #lp .process-info p:last-child{margin:0}
+  #lp .process-info .note{font-size:13px}
+
+  /* Responsive */
+  @media (max-width:820px){
+    #lp section{padding:52px 0}
+    #lp .hero-title{font-size:30px}
+    #lp .section-title{font-size:26px}
+    #lp .era-stats{grid-template-columns:1fr}
+    #lp .meaning-compare{grid-template-columns:1fr}
+    #lp .case-stats{grid-template-columns:1fr}
+    #lp .case-stats.two{grid-template-columns:1fr}
+  }
+</style>
+
+<div id="lp">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">クラウドファンディング達成率 100% のプロダクトデザイン</p>
+      <div class="hero-badge">PRODUCT DESIGN</div>
+      <h1 class="hero-title">
+        なぜ、同じ機能なのに<br>
+        「選ばれる製品」と「埋もれる製品」に<br>
+        分かれるのか
+      </h1>
+      <p class="hero-lead">
+        技術力では負けていない。品質にも自信がある。<br>
+        それなのに、競合に押されている——。<br>
+        その理由は「技術以外」のところにあります。
+      </p>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="intro">
+    <div class="wrap">
+      <p class="section-number">01</p>
+      <h2 class="section-title">消費者の本音：<br>「デザインで買うのをやめたことがある」</h2>
+      <p class="section-lead">まず、ある調査結果をご覧ください。</p>
+
+      <div class="research-card card">
+        <p class="research-title">消費者購買行動調査 2024</p>
+        <p class="research-meta">全国20〜60代男女 1,200名対象</p>
+
+        <p class="research-question">
+          Q. 機能や価格に問題がないのに、「デザイン（見た目）」が理由で<br>
+          購入をやめた経験はありますか？
+        </p>
+
+        <ul class="research-result">
+          <li><span>ある（何度もある）</span><strong>47%</strong></li>
+          <li><span>ある（1〜2回）</span><strong>31%</strong></li>
+          <li><span>ない</span><strong>22%</strong></li>
+        </ul>
+
+        <p class="research-note">※ 2024年 Javasparrow調べ（インターネット調査）</p>
+      </div>
+
+      <div class="research-summary">
+        <p>
+          実に78%の消費者が<br>
+          「デザインが理由で購入をやめた経験がある」<br>
+          と回答しています。
+        </p>
+        <p>
+          つまり、どれだけ機能が優れていても、どれだけ価格が適正でも、<br>
+          デザインの印象が悪ければ——<br>
+          消費者は買わないのです。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="era">
+    <div class="wrap">
+      <p class="section-number">02</p>
+      <h2 class="section-title">「良いものを作れば売れる」<br>時代は、静かに終わった</h2>
+
+      <div class="era-text">
+        <p>
+          かつて、製品の勝敗は「機能」と「品質」で決まりました。<br>
+          より高性能なもの、より丈夫なもの、<br>
+          より精度の高いものが選ばれる。<br>
+          技術力のある会社が正当に評価される時代でした。
+        </p>
+        <p>
+          しかし今、市場には同等の機能を持つ製品があふれています。<br>
+          海外メーカーも技術力をつけ、<br>
+          価格では勝負にならない。<br>
+          機能で差がつかなくなった今、<br>
+          何が「選ばれる理由」になるのでしょうか。
+        </p>
+      </div>
+
+      <div class="era-stats">
+        <div class="stat-card">
+          <p class="stat-value">78%</p>
+          <p class="stat-label">デザインで購入をやめた経験<br>がある消費者</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-value">3秒</p>
+          <p class="stat-label">消費者が製品の第一印象を決<br>める時間</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-value">2.3倍</p>
+          <p class="stat-label">デザイン投資企業の売上成長<br>率※</p>
+        </div>
+      </div>
+
+      <p class="era-note">
+        ※ McKinsey「The Business Value of Design」（2018）より。<br>
+        デザインを経営に活用する上位25%の企業は、<br>
+        業界平均の2.3倍の売上成長率を記録。
+      </p>
+
+      <div class="era-message">
+        <p>
+          同じ機能、同じ品質。<br>
+          それでも「選ばれる製品」と「埋もれる製品」がある。<br>
+          その違いは、どこにあるのか。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="meaning">
+    <div class="wrap">
+      <p class="section-number">03</p>
+      <h2 class="section-title">多くの企業が見落としている<br>「デザイン」の本当の意味</h2>
+
+      <div class="meaning-intro">
+        <p>
+          「デザイン」と聞くと、多くの方が「見た目を整えること」を想像します。<br>
+          色を変える、形をきれいにする、パッケージをおしゃれにする——。
+        </p>
+        <p>
+          しかし、本来のデザインとは、製品の価値を正しく伝え、<br>
+          選ばれる理由を作ることです。
+        </p>
+      </div>
+
+      <div class="meaning-compare">
+        <div class="compare-card">
+          <p class="compare-label">見た目だけのデザイン</p>
+          <h3 class="compare-title">表面を整える</h3>
+          <p class="compare-text">
+            色や形を変えるだけ。<br>
+            製品の本質的な価値は変わらない。
+          </p>
+        </div>
+
+        <div class="compare-card highlight">
+          <p class="compare-label">売れるデザイン</p>
+          <h3 class="compare-title">価値を伝える</h3>
+          <p class="compare-text">
+            誰に、何を、どう伝えるかを設計し、<br>
+            選ばれる理由を作る。
+          </p>
+        </div>
+      </div>
+
+      <div class="meaning-note">
+        <p>
+          御社の製品には、長年培った技術と品質があるはずです。<br>
+          問題は、その価値が顧客に正しく伝わっていないこと。<br>
+          これは技術の問題ではなく、「伝え方」の問題です。
+        </p>
+      </div>
+
+      <div class="meaning-quote">
+        <p class="quote-strong">人は「機能」で比較し、「印象」で決める。</p>
+        <p>
+          同じ機能なら、「なんとなく良さそう」な方が選ばれます。<br>
+          この「なんとなく」を設計するのが、<br>
+          本来のデザインです。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="outsourcing">
+    <div class="wrap">
+      <p class="section-number">04</p>
+      <h2 class="section-title">なぜ、デザインを外注しても<br>うまくいかないのか</h2>
+
+      <div class="outsourcing-intro">
+        <p>
+          「それなら、デザインを外注すればいい」——<br>
+          そう考える方も多いでしょう。<br>
+          しかし、多くの企業がデザイン外注で失敗しています。
+        </p>
+      </div>
+
+      <div class="outsourcing-box">
+        <p class="box-title">よくある失敗パターン</p>
+        <ul class="box-list">
+          <li>クラウドソーシングで安く依頼 → 製造を知らないデザイナーが、作れないデザインを上げてくる</li>
+          <li>海外工場のデザイナーに依頼 → 品質やブランドイメージが意図と違う</li>
+          <li>デザイン会社に依頼 → きれいなデザインは上がるが、量産したら品質が落ちる</li>
+        </ul>
+      </div>
+
+      <div class="outsourcing-text">
+        <p>
+          これらの失敗には共通点があります。<br>
+          デザインと製造が分断されているということです。
+        </p>
+        <p>
+          デザイナーは「絵を描く人」、製造は「作る人」。<br>
+          この分業が当たり前になっていますが、<br>
+          実はここに大きな落とし穴があります。
+        </p>
+        <p>
+          デザイナーが製造を理解していなければ、<br>
+          量産で品質は必ず落ちます。<br>
+          どれだけ美しいデザインでも、<br>
+          製造工程で妥協が入れば、<br>
+          最終製品は意図したものになりません。
+        </p>
+      </div>
+
+      <blockquote>
+        <p>
+          以前、別のデザイン会社に依頼したことがあります。<br>
+          デザイン案は良かったのですが、<br>
+          いざ量産してみると「この素材では再現できない」「コストが合わない」と言われ、結局<br>
+          まったく違うものになりました。
+        </p>
+        <cite>— 精密機器メーカー 開発部長</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="conditions">
+    <div class="wrap">
+      <p class="section-number">05</p>
+      <h2 class="section-title">「売れるデザイン」に必要な<br>3つの条件</h2>
+
+      <p class="section-lead">
+        では、製品を「選ばれる製品」に変えるデザインには、<br>
+        何が必要なのでしょうか。
+      </p>
+
+      <div class="conditions-list">
+        <div class="condition-item">
+          <h3 class="condition-title">条件1：マーケティング視点</h3>
+          <p class="condition-text">
+            誰が、どんな場面で、なぜこの製品を選ぶのか。<br>
+            ターゲットの購買心理を理解した上でデザインする。
+          </p>
+        </div>
+
+        <div class="condition-item">
+          <h3 class="condition-title">条件2：製造への深い理解</h3>
+          <p class="condition-text">
+            素材の特性、加工の制約、コストと品質のバランス。<br>
+            製造を熟知していなければ、デザインは「絵に描いた餅」になる。
+          </p>
+        </div>
+
+        <div class="condition-item">
+          <h3 class="condition-title">条件3：初期から量産までの一貫したフォロー</h3>
+          <p class="condition-text">
+            デザインを納品して終わりではない。<br>
+            量産で品質が落ちないよう、最後まで責任を持つ。
+          </p>
+        </div>
+      </div>
+
+      <p class="conditions-summary">
+        この3つが揃って初めて、「売れるデザイン」が実現します。<br>
+        しかし、この3つを満たせるデザイナーは、実はほとんどいません。
+      </p>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="case">
+    <div class="wrap">
+      <p class="section-number">06</p>
+      <h2 class="section-title">デザインで変わった製品の実例</h2>
+
+      <div class="case-card">
+        <p class="case-label">CASE STUDY 01</p>
+        <h3 class="case-title">ZiTA SQUARE｜自動開閉ゴミ箱</h3>
+        <div class="case-text">
+          <p>
+            自動開閉ゴミ箱「ZiTA」シリーズの新モデル。機能だけでなく、<br>
+            「インテリアに溶け込むデザイン」という価値を加えることで、価格競争から脱却。
+          </p>
+          <p>
+            量産を前提とした設計、製造工程での品質管理まで一貫して行うことで、デザインの意図を最終製品まで反映。<br>
+            クラウドファンディングで大きな支持を集めました。
+          </p>
+        </div>
+        <div class="case-stats">
+          <div class="stat"><p class="stat-value">1,847%</p><p class="stat-label">目標達成率</p></div>
+          <div class="stat"><p class="stat-value">2,340万円</p><p class="stat-label">調達金額</p></div>
+          <div class="stat"><p class="stat-value">1,892人</p><p class="stat-label">支援者数</p></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <p class="case-label">CASE STUDY 02</p>
+        <h3 class="case-title">某計測機器メーカー｜業務用センサー</h3>
+        <div class="case-text">
+          <p>
+            創業40年の計測機器メーカー。技術力には定評があったが、<br>
+            「見た目が古い」「競合の海外製品に見劣りする」という声が営業現場から上がっていた。
+          </p>
+          <p>
+            機能はそのままに、筐体デザインを刷新。展示会での反応が大きく変わり、商談数が増加。<br>
+            「技術だけでなく、信頼感が伝わるようになった」と評価。
+          </p>
+        </div>
+        <div class="case-stats two">
+          <div class="stat"><p class="stat-value">2.4倍</p><p class="stat-label">展示会での名刺獲得数</p></div>
+          <div class="stat"><p class="stat-value">168%</p><p class="stat-label">リニューアル後の売上（前年比）</p></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <p class="case-label">CASE STUDY 03</p>
+        <h3 class="case-title">某工具メーカー｜電動工具シリーズ</h3>
+        <div class="case-text">
+          <p>
+            職人向け電動工具を製造する老舗メーカー。「使いやすさ」は評価されていたが、若い職人へのアプローチに課題を感じていた。
+          </p>
+          <p>
+            ターゲットを明確にし、「プロが選ぶ道具」としてのブランドイメージを再構築。<br>
+            デザインだけでなく、パッケージ、カタログまで一貫したトーンで制作。
+          </p>
+        </div>
+        <div class="case-stats two">
+          <div class="stat"><p class="stat-value">35歳↓</p><p class="stat-label">購入者平均年齢の若返り</p></div>
+          <div class="stat"><p class="stat-value">142%</p><p class="stat-label">EC売上（前年比）</p></div>
+        </div>
+
+        <blockquote>
+          <p>
+            正直、デザインでここまで変わるとは思っていませんでした。展示会で「御社の製品、雰囲気変わりましたね」と言われることが増えました。技術は変わっていないのに、お客様の反応がまるで違う。
+          </p>
+          <cite>— 計測機器メーカー 代表取締役</cite>
+        </blockquote>
+
+        <blockquote>
+          <p>
+            量産の段階まで一緒に見てもらえるのが決め手でした。以前は「デザイン通りにならない」ことが多かったのですが、今回は最後まで意図した通りの製品ができました。
+          </p>
+          <cite>— 工具メーカー 商品企画部</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="process">
+    <div class="wrap">
+      <p class="section-number">07</p>
+      <h2 class="section-title">プロジェクトの進め方</h2>
+
+      <p class="section-lead">
+        「デザインを頼むのは初めて」という方も多いと思います。<br>
+        どのように進めるのか、流れをご説明します。
+      </p>
+
+      <ol class="process-steps">
+        <li class="process-step">
+          <div class="step-number">1</div>
+          <div>
+            <h3 class="step-title">ヒアリング・現状分析</h3>
+            <p class="step-text">
+              御社の製品、技術的な強み、競合状況、課題をお聞きします。<br>
+              ターゲットとなる顧客像を一緒に明確にします。
+            </p>
+          </div>
+        </li>
+
+        <li class="process-step">
+          <div class="step-number">2</div>
+          <div>
+            <h3 class="step-title">コンセプト設計</h3>
+            <p class="step-text">
+              「誰に、何を、どう伝えるか」を設計します。<br>
+              デザインの方向性を複数案ご提示し、議論しながら決定します。
+            </p>
+          </div>
+        </li>
+
+        <li class="process-step">
+          <div class="step-number">3</div>
+          <div>
+            <h3 class="step-title">デザイン制作</h3>
+            <p class="step-text">
+              量産を前提とした設計を行います。<br>
+              素材、加工方法、コストを考慮しながら、実現可能なデザインを制作します。
+            </p>
+          </div>
+        </li>
+
+        <li class="process-step">
+          <div class="step-number">4</div>
+          <div>
+            <h3 class="step-title">量産フォロー</h3>
+            <p class="step-text">
+              デザイン納品で終わりではありません。<br>
+              試作確認、製造工場との調整、品質チェックまで責任を持って伴走します。
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="process-info">
+        <p>期間：2〜3ヶ月（製品の複雑さにより変動）</p>
+        <p>費用：月額25万円〜</p>
+        <p class="note">※ 詳細は無料相談にてお見積りいたします。</p>
+      </div>
+    </div>
+  </section>
+</div>
