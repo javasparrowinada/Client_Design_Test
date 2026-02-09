@@ -115,6 +115,26 @@
       margin: 0 auto;
     }
 
+    .hero-cta-button {
+      display: inline-block;
+      margin-top: 32px;
+      background: var(--color-highlight);
+      color: #fff;
+      padding: 16px 40px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-cta-button:hover {
+      background: #d4b972;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196, 169, 98, 0.3);
+    }
+
     /* Article Container */
     .article {
       max-width: var(--max-width);
@@ -763,6 +783,42 @@
       padding-top: 16px;
       border-top: 1px solid var(--color-border);
     }
+
+    /* Floating CTA */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--color-accent);
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(26, 58, 92, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      letter-spacing: 0.05em;
+    }
+
+    .floating-cta:hover {
+      background: var(--color-accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 58, 92, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      .floating-cta {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -784,6 +840,7 @@
         それなのに、競合に押されている——。<br>
         その理由は「技術以外」のところにあります。
       </p>
+      <a href="#cta" class="hero-cta-button">無料相談に申し込む</a>
     </div>
   </section>
 
@@ -1168,7 +1225,7 @@
     </div>
   </section>
 
-  <section class="cta-section">
+  <section class="cta-section" id="cta">
     <div class="cta-inner">
       <h2 class="cta-title">
         まずは、御社の製品について<br>
@@ -1188,6 +1245,8 @@
     <p class="footer-logo">JAVASPARROW</p>
     <p class="footer-copy">© Javasparrow Inc. All Rights Reserved.</p>
   </footer>
+
+  <a href="#cta" class="floating-cta">無料相談はこちら</a>
 
 </body>
 </html>
