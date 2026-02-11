@@ -4,830 +4,494 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>なぜ、同じ機能なのに「選ばれる製品」と「埋もれる製品」に分かれるのかv２ | Javasparrow</title>
+  <title>なぜ、同じ機能なのに「選ばれる製品」と「埋もれる製品」に分かれるのか | Javasparrow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Sora:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* ============================================
+       TOKENS
+    ============================================ */
     :root {
-      --color-bg: #FAFAF8;
-      --color-bg-section: #F5F4F0;
-      --color-text: #2C2C2C;
-      --color-text-secondary: #5A5A5A;
-      --color-accent: #1A3A5C;
-      --color-accent-light: #2D5A8A;
-      --color-highlight: #C4A962;
-      --color-border: #E0DED8;
-      --color-negative: #C45C5C;
-      --font-serif: 'Noto Serif JP', serif;
-      --font-sans: 'Noto Sans JP', sans-serif;
-      --max-width: 720px;
-      --spacing-section: 80px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.9;
-      color: var(--color-text);
-      background-color: var(--color-bg);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Header */
-    .header {
-      background: var(--color-accent);
-      color: #fff;
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-
-    .header span {
-      color: var(--color-highlight);
-      font-weight: 700;
-    }
-
-    /* Hero */
-    .hero {
-      background: linear-gradient(180deg, #1A3A5C 0%, #2D5A8A 100%);
-      color: #fff;
-      padding: 60px 20px 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-label {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      margin-bottom: 24px;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero-title {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 700;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .hero-lead {
-      font-size: 15px;
-      line-height: 1.8;
-      opacity: 0.9;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    .hero-cta-button {
-      display: inline-block;
-      margin-top: 32px;
-      background: var(--color-highlight);
-      color: #fff;
-      padding: 16px 40px;
-      font-size: 15px;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      letter-spacing: 0.05em;
-    }
-
-    .hero-cta-button:hover {
-      background: #d4b972;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(196, 169, 98, 0.3);
-    }
-
-    /* Article Container */
-    .article {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Section */
-    .section {
-      padding: var(--spacing-section) 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .section:last-of-type {
-      border-bottom: none;
-    }
-
-    .section-number {
-      font-family: var(--font-serif);
-      font-size: 11px;
-      color: var(--color-accent);
-      letter-spacing: 0.2em;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4vw, 24px);
-      font-weight: 700;
-      color: var(--color-accent);
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    .section p {
-      margin-bottom: 20px;
-      color: var(--color-text);
-    }
-
-    .section p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Highlight Box */
-    .highlight-box {
-      background: var(--color-bg-section);
-      border-left: 3px solid var(--color-highlight);
-      padding: 24px 28px;
-      margin: 32px 0;
-    }
-
-    .highlight-box p {
-      margin-bottom: 0;
-      font-size: 15px;
-    }
-
-    /* Quote */
-    .quote {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-accent);
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-    }
-
-    .quote::before,
-    .quote::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: var(--color-highlight);
-      margin: 0 auto 20px;
-    }
-
-    .quote::after {
-      margin: 20px auto 0;
-    }
-
-    /* Survey Section */
-    .survey-box {
-      background: #fff;
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 32px;
-      margin: 32px 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    }
-
-    .survey-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .survey-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--color-bg-section);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .survey-meta {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-    }
-
-    .survey-meta strong {
-      display: block;
-      font-size: 14px;
-      color: var(--color-text);
-      margin-bottom: 2px;
-    }
-
-    .survey-question {
-      font-family: var(--font-serif);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-accent);
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .survey-results {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .survey-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .survey-label {
-      width: 200px;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 600px) {
-      .survey-label {
-        width: 140px;
-        font-size: 13px;
-      }
-    }
-
-    .survey-bar-container {
-      flex: 1;
-      height: 28px;
-      background: var(--color-bg-section);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .survey-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      transition: width 1s ease;
-    }
-
-    .survey-bar-fill.high {
-      background: linear-gradient(90deg, var(--color-negative) 0%, #D47A7A 100%);
-    }
-
-    .survey-bar-fill.medium {
-      background: linear-gradient(90deg, var(--color-highlight) 0%, #D4BC7A 100%);
-    }
-
-    .survey-bar-fill.low {
-      background: linear-gradient(90deg, #7A9D7A 0%, #9DB89D 100%);
-    }
-
-    .survey-source {
-      font-size: 11px;
-      color: var(--color-text-secondary);
-      margin-top: 16px;
-      text-align: right;
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 32px 0;
-    }
-
-    @media (max-width: 600px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .stat-item {
-      background: var(--color-bg-section);
-      padding: 24px 20px;
-      text-align: center;
-      border-radius: 4px;
-    }
-
-    .stat-number {
-      font-family: var(--font-serif);
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--color-accent);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-number span {
-      font-size: 18px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-    }
-
-    /* Comparison */
-    .comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 32px 0;
-    }
-
-    @media (max-width: 600px) {
-      .comparison {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .comparison-item {
-      padding: 24px;
-      border-radius: 4px;
-    }
-
-    .comparison-item.negative {
-      background: #F8F6F3;
-      border: 1px solid #E8E6E1;
-    }
-
-    .comparison-item.positive {
-      background: #F0F4F8;
-      border: 1px solid #D0DCE8;
-    }
-
-    .comparison-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .comparison-item.negative .comparison-label {
-      color: #8B7355;
-    }
-
-    .comparison-item.positive .comparison-label {
-      color: var(--color-accent);
-    }
-
-    .comparison-item h4 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .comparison-item p {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin-bottom: 0;
-    }
-
-    /* Case Study */
-    .case-study {
-      background: #fff;
-      border: 1px solid var(--color-border);
-      padding: 32px;
-      margin: 32px 0;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    }
-
-    .case-study-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--color-highlight);
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .case-study-title {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--color-accent);
-      margin-bottom: 16px;
-    }
-
-    .case-study p {
-      font-size: 15px;
-      margin-bottom: 12px;
-    }
-
-    .case-study-stats {
-      display: flex;
-      gap: 24px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--color-border);
-      flex-wrap: wrap;
-    }
-
-    .case-study-stat {
-      text-align: center;
-    }
-
-    .case-study-stat-number {
-      font-family: var(--font-serif);
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--color-accent);
-      line-height: 1;
-    }
-
-    .case-study-stat-number span {
-      font-size: 14px;
-    }
-
-    .case-study-stat-label {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      margin-top: 4px;
-    }
+      --bg: #FAFAFA;
+      --bg-warm: #F7F5F0;
+      --bg-white: #FFFFFF;
+      --text: #333;
+      --text-sub: #888;
+      --text-light: #AAA;
+      --accent: #2B2B2B;
+      --accent-warm: #8B6914;
+      --gold: #D4A843;
+      --gold-soft: rgba(212,168,67,.12);
+      --cta: #C0392B;
+      --cta-hover: #D94B3E;
+      --border: #EBEBEB;
+      --negative: #C07070;
+      --positive: #5A8A5A;
+      --serif: 'Shippori Mincho', serif;
+      --sans: 'Zen Kaku Gothic New', sans-serif;
+      --display: 'Sora', sans-serif;
+      --mw: 720px;
+      --sp: 100px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);font-size:15px;line-height:2.1;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+    /* ============================================
+       HEADER
+    ============================================ */
+    .header{background:var(--bg-white);padding:10px 20px;text-align:center;font-size:11px;letter-spacing:.15em;border-bottom:1px solid var(--border)}
+    .header span{color:var(--cta);font-weight:700}
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero{background:var(--bg-white);padding:80px 20px 100px;text-align:center;position:relative;overflow:hidden}
+    .hero-deco{position:absolute;pointer-events:none;opacity:.04}
+    .hero-deco-1{top:40px;left:-60px;width:300px;height:300px;border:1px solid var(--accent);border-radius:50%}
+    .hero-deco-2{bottom:-40px;right:-80px;width:400px;height:400px;border:1px solid var(--accent);transform:rotate(45deg)}
+    .hero-deco-dot{position:absolute;border-radius:50%;background:var(--gold)}
+    .hero-deco-dot-1{top:60%;left:8%;width:6px;height:6px;opacity:.3}
+    .hero-deco-dot-2{top:20%;right:12%;width:4px;height:4px;opacity:.25}
+    .hero-deco-dot-3{top:80%;right:25%;width:5px;height:5px;opacity:.18}
+
+    .hero-inner{max-width:var(--mw);margin:0 auto;position:relative;z-index:1;animation:fadeIn 1.2s ease-out}
+    .hero-label{display:inline-block;font-family:var(--display);font-size:10px;letter-spacing:.35em;color:var(--text-light);margin-bottom:40px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .hero-title{font-family:var(--serif);font-size:clamp(24px,4.5vw,34px);font-weight:700;line-height:1.8;margin-bottom:32px;color:var(--accent)}
+    .hero-lead{font-size:14px;line-height:2.2;color:var(--text-sub);max-width:480px;margin:0 auto}
+
+    /* Hero visual: abstract product silhouettes */
+    .hero-visual{margin:48px auto 0;display:flex;justify-content:center;gap:16px;align-items:flex-end}
+    .hero-prod{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .hero-shape{width:72px;height:96px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);position:relative;transition:all .4s ease}
+    .hero-shape.sel{border-color:var(--gold);box-shadow:0 4px 24px var(--gold-soft)}
+    .hero-shape.sel::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;color:var(--gold)}
+    .hero-shape.dim{opacity:.3}
+    .hero-plabel{font-size:10px;color:var(--text-light);letter-spacing:.05em}
+    .hero-plabel.hl{color:var(--accent-warm);font-weight:700}
+
+    .hero-cta{display:inline-block;margin-top:48px;background:var(--cta);color:#fff;padding:18px 52px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.08em;border-radius:3px;transition:all .3s ease;box-shadow:0 4px 16px rgba(192,57,43,.2)}
+    .hero-cta:hover{background:var(--cta-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,57,43,.3)}
+
+    @media(max-width:600px){
+      .hero-shape{width:52px;height:72px}
+      .hero-visual{gap:10px}
+    }
+
+    /* ============================================
+       ARTICLE
+    ============================================ */
+    .article{max-width:var(--mw);margin:0 auto;padding:0 24px}
+
+    /* ============================================
+       SECTIONS
+    ============================================ */
+    .section{padding:var(--sp) 0;position:relative}
+    .section::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:32px;height:1px;background:var(--border)}
+    .section:last-of-type::after{display:none}
+    .snum{font-family:var(--display);font-size:10px;color:var(--text-light);letter-spacing:.4em;margin-bottom:20px;display:block}
+    .stitle{font-family:var(--serif);font-size:clamp(20px,3.5vw,26px);font-weight:700;color:var(--accent);line-height:1.7;margin-bottom:32px}
+    .section p{margin-bottom:24px;font-size:15px}
+    .section p:last-child{margin-bottom:0}
+    .em{background:linear-gradient(transparent 65%,rgba(212,168,67,.2) 65%);padding:0 2px}
+    strong{font-weight:700;color:var(--accent)}
+
+    /* ============================================
+       HIGHLIGHT BOX
+    ============================================ */
+    .hbox{background:var(--bg-warm);padding:32px 36px;margin:44px 0;border-radius:4px;position:relative}
+    .hbox::before{content:'';position:absolute;left:0;top:20px;bottom:20px;width:2px;background:var(--gold)}
+    .hbox p{margin-bottom:0;font-size:14px;line-height:2.2}
+
+    /* ============================================
+       QUOTE
+    ============================================ */
+    .quote{font-family:var(--serif);font-size:18px;color:var(--accent);text-align:center;padding:56px 20px;line-height:2.2;letter-spacing:.05em}
+    .quote::before,.quote::after{content:'';display:block;width:24px;height:1px;background:var(--text-light);margin:0 auto 24px}
+    .quote::after{margin:24px auto 0}
+
+    /* ============================================
+       SURVEY
+    ============================================ */
+    .survey{background:var(--bg-white);border:1px solid var(--border);border-radius:8px;padding:36px;margin:40px 0;box-shadow:0 2px 16px rgba(0,0,0,.03)}
+    .survey-hd{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+    .survey-icon{width:40px;height:40px;background:var(--bg-warm);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+    .survey-meta{font-size:11px;color:var(--text-sub)}
+    .survey-meta strong{display:block;font-size:13px;color:var(--text);margin-bottom:2px;font-weight:500}
+    .survey-q{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--accent);margin-bottom:24px;line-height:1.8}
+    .survey-bars{display:flex;flex-direction:column;gap:10px}
+    .sbar{display:flex;align-items:center;gap:12px}
+    .sbar-label{width:180px;font-size:13px;flex-shrink:0;color:var(--text-sub)}
+    .sbar-track{flex:1;height:24px;background:var(--bg-warm);border-radius:12px;overflow:hidden}
+    .sbar-fill{height:100%;border-radius:12px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:11px;font-weight:600;color:#fff;transition:width 1s ease}
+    .sbar-fill.hi{background:linear-gradient(90deg,var(--negative),#D08888)}
+    .sbar-fill.md{background:linear-gradient(90deg,var(--gold),#E0C070)}
+    .sbar-fill.lo{background:linear-gradient(90deg,#7A9D7A,#9DB89D)}
+    .survey-src{font-size:10px;color:var(--text-light);margin-top:16px;text-align:right}
+    @media(max-width:600px){.sbar-label{width:120px;font-size:12px}}
+
+    /* 78% callout */
+    .stat-callout{display:flex;align-items:center;gap:20px;background:var(--bg-warm);border-radius:8px;padding:24px 28px;margin:32px 0}
+    .stat-big{font-family:var(--display);font-size:56px;font-weight:700;color:var(--cta);line-height:1;flex-shrink:0}
+    .stat-big span{font-size:24px}
+    .stat-callout-text{font-size:14px;line-height:1.8}
+    @media(max-width:600px){.stat-callout{flex-direction:column;text-align:center}.stat-big{font-size:48px}}
+
+    /* ============================================
+       STATS GRID
+    ============================================ */
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:44px 0;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    @media(max-width:600px){.stats-grid{grid-template-columns:1fr}}
+    .stat-item{background:var(--bg-white);padding:36px 20px;text-align:center}
+    .stat-num{font-family:var(--display);font-size:40px;font-weight:600;color:var(--accent);line-height:1;margin-bottom:10px}
+    .stat-num span{font-size:16px;color:var(--text-sub)}
+    .stat-lbl{font-size:11px;color:var(--text-sub);letter-spacing:.02em}
+    .data-src{font-size:11px;color:var(--text-light);margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+
+    /* ============================================
+       ERA DIAGRAM (Section 02)
+    ============================================ */
+    .era-diagram{margin:44px 0;display:flex;align-items:center;justify-content:center;gap:0}
+    .era-block{text-align:center;padding:24px 20px;flex:1;max-width:200px}
+    .era-icon{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+    .era-block.past .era-icon{background:var(--bg-warm);border:1px solid var(--border)}
+    .era-block.now .era-icon{background:var(--gold-soft);border:1px solid var(--gold)}
+    .era-block h4{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px}
+    .era-block p{font-size:11px;color:var(--text-light);margin-bottom:0}
+    .era-arrow{font-size:20px;color:var(--text-light);flex-shrink:0;padding:0 4px}
+    @media(max-width:600px){.era-diagram{flex-direction:column;gap:8px}.era-arrow{transform:rotate(90deg)}}
+
+    /* ============================================
+       COMPARISON (Section 03)
+    ============================================ */
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:40px 0}
+    @media(max-width:600px){.compare{grid-template-columns:1fr}}
+    .cmp{padding:32px 28px;border-radius:8px;position:relative}
+    .cmp.neg{background:#FAF6F3;border:1px solid #EDE8E3}
+    .cmp.pos{background:var(--bg-white);border:1px solid var(--gold);box-shadow:0 2px 16px var(--gold-soft)}
+    .cmp-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+    .cmp.neg .cmp-icon{background:#F0EBE6}
+    .cmp.pos .cmp-icon{background:var(--gold-soft)}
+    .cmp-label{font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.2em;margin-bottom:12px;display:block;text-transform:uppercase}
+    .cmp.neg .cmp-label{color:var(--text-light)}
+    .cmp.pos .cmp-label{color:var(--accent-warm)}
+    .cmp h4{font-family:var(--serif);font-size:16px;font-weight:700;margin-bottom:8px;color:var(--accent)}
+    .cmp p{font-size:13px;color:var(--text-sub);margin-bottom:0}
+
+    /* ============================================
+       DISCONNECT DIAGRAM (Section 04)
+    ============================================ */
+    .disc{margin:40px 0;display:flex;flex-direction:column;gap:24px}
+    .disc-row{display:flex;align-items:center;gap:12px;padding:20px 24px;border-radius:8px}
+    .disc-row.bad{background:#FAF6F3;border:1px dashed #DDD5CC}
+    .disc-row.good{background:var(--bg-white);border:1px solid var(--gold)}
+    .disc-label{font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;writing-mode:vertical-rl;text-orientation:mixed;flex-shrink:0;padding:0 4px}
+    .disc-row.bad .disc-label{color:var(--text-light)}
+    .disc-row.good .disc-label{color:var(--accent-warm)}
+    .disc-nodes{display:flex;align-items:center;gap:8px;flex:1;flex-wrap:wrap;justify-content:center}
+    .disc-node{padding:8px 16px;border-radius:4px;font-size:12px;font-weight:500;text-align:center}
+    .disc-row.bad .disc-node{background:#F0EBE5;color:var(--text-sub)}
+    .disc-row.good .disc-node{background:var(--gold-soft);color:var(--accent)}
+    .disc-arr{font-size:14px;flex-shrink:0}
+    .disc-row.bad .disc-arr{color:var(--negative)}
+    .disc-row.good .disc-arr{color:var(--gold)}
+    .disc-break{font-size:18px;color:var(--negative);flex-shrink:0}
+    @media(max-width:600px){.disc-label{writing-mode:horizontal-tb;margin-bottom:8px}.disc-row{flex-direction:column;text-align:center}}
+
+    /* ============================================
+       TESTIMONIAL
+    ============================================ */
+    .testi{background:var(--bg-warm);padding:32px 36px;margin:28px 0;border-radius:8px;position:relative}
+    .testi::before{content:'\201C';font-family:var(--serif);font-size:56px;color:var(--text-light);position:absolute;top:12px;left:24px;line-height:1;opacity:.3}
+    .testi-text{font-size:14px;line-height:2.1;padding-left:20px;margin-bottom:12px}
+    .testi-author{font-size:12px;color:var(--text-light);padding-left:20px}
+
+    /* ============================================
+       CONDITIONS CARDS (Section 05)
+    ============================================ */
+    .cond-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0}
+    @media(max-width:600px){.cond-grid{grid-template-columns:1fr}}
+    .cond-card{background:var(--bg-white);border:1px solid var(--border);border-radius:8px;padding:32px 24px;text-align:center;transition:all .3s ease}
+    .cond-card:hover{border-color:var(--gold);box-shadow:0 4px 20px var(--gold-soft)}
+    .cond-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:var(--gold-soft);display:flex;align-items:center;justify-content:center}
+    .cond-icon svg{width:24px;height:24px;stroke:var(--accent-warm);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .cond-num{font-family:var(--display);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--gold);margin-bottom:8px}
+    .cond-title{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--accent);margin-bottom:8px}
+    .cond-desc{font-size:12px;color:var(--text-sub);line-height:1.8}
+
+    /* ============================================
+       CASE STUDY (Section 06)
+    ============================================ */
+    .case{background:var(--bg-white);border:1px solid var(--border);margin:40px 0;border-radius:8px;box-shadow:0 2px 16px rgba(0,0,0,.03);overflow:hidden}
+    /* Image placeholder */
+    .case-img{width:100%;height:240px;background:var(--bg-warm);display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+    .case-img-icon{width:48px;height:48px;border:1.5px dashed var(--text-light);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .case-img-icon svg{width:20px;height:20px;stroke:var(--text-light);fill:none;stroke-width:1.5}
+    .case-img-spec{font-family:var(--display);font-size:10px;color:var(--text-light);letter-spacing:.05em;text-align:center;line-height:1.6}
+    .case-body{padding:32px 36px}
+    .case-label{font-family:var(--display);font-size:9px;font-weight:600;color:var(--accent-warm);letter-spacing:.3em;margin-bottom:16px;display:block;text-transform:uppercase}
+    .case-title{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--accent);margin-bottom:20px}
+    .case p{font-size:14px;margin-bottom:14px;line-height:2}
+    .case-stats{display:flex;gap:32px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap}
+    .case-stat{text-align:center}
+    .case-stat-num{font-family:var(--display);font-size:32px;font-weight:600;color:var(--accent);line-height:1}
+    .case-stat-num span{font-size:13px;color:var(--text-sub)}
+    .case-stat-lbl{font-size:11px;color:var(--text-light);margin-top:6px}
+
+    /* ============================================
+       PROCESS TIMELINE (Section 07)
+    ============================================ */
+    .timeline{margin:44px 0;position:relative}
+    .timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:1px;background:var(--border)}
+    @media(max-width:600px){.timeline::before{left:18px}}
+    .step{display:flex;gap:24px;padding:28px 0;position:relative}
+    .step:last-child{padding-bottom:0}
+    .step-num{width:44px;height:44px;background:var(--bg-white);border:1.5px solid var(--border);color:var(--text-sub);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:13px;font-weight:600;flex-shrink:0;position:relative;z-index:1;transition:all .3s ease}
+    .step:hover .step-num{border-color:var(--gold);color:var(--accent-warm);background:var(--gold-soft)}
+    .step-content{padding-top:8px}
+    .step-content h4{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--accent);margin-bottom:6px}
+    .step-content p{font-size:13px;color:var(--text-sub);margin-bottom:0}
+    .step-dur{display:inline-block;font-family:var(--display);font-size:10px;color:var(--text-light);background:var(--bg-warm);padding:2px 10px;border-radius:10px;margin-top:8px}
+
+    /* ============================================
+       COMPANY SECTION
+    ============================================ */
+    .company{background:var(--accent);color:#fff;padding:80px 24px;margin-top:var(--sp)}
+    .company-inner{max-width:var(--mw);margin:0 auto}
+    .company-name{font-family:var(--display);font-size:11px;letter-spacing:.4em;color:var(--gold);margin-bottom:24px}
+    .company-title{font-family:var(--serif);font-size:clamp(20px,4vw,28px);font-weight:700;line-height:1.8;margin-bottom:32px}
+    .company p{font-size:14px;line-height:2.2;opacity:.85;margin-bottom:20px}
+
+    /* Representative placeholder */
+    .profile{display:flex;gap:24px;align-items:center;margin:32px 0;padding:24px;background:rgba(255,255,255,.05);border-radius:8px}
+    .profile-photo{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .profile-photo svg{width:24px;height:24px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:1.5}
+    .profile-info{font-size:13px;line-height:1.8}
+    .profile-name{font-family:var(--serif);font-size:16px;font-weight:700;margin-bottom:4px}
+    .profile-role{font-size:11px;opacity:.6}
+    @media(max-width:600px){.profile{flex-direction:column;text-align:center}}
+
+    .feat-list{margin:40px 0}
+    .feat{display:flex;align-items:flex-start;gap:18px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+    .feat:last-child{border-bottom:none}
+    .feat-icon{width:32px;height:32px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;color:rgba(255,255,255,.7);font-family:var(--display);font-weight:600}
+    .feat h4{font-size:14px;font-weight:700;margin-bottom:4px}
+    .feat p{font-size:13px;margin-bottom:0;opacity:.7}
+
+    /* Awards badges */
+    .awards{display:flex;gap:16px;margin:40px 0;flex-wrap:wrap}
+    .badge{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 18px;font-size:12px;flex:1;min-width:160px}
+    .badge-icon{width:32px;height:32px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .badge strong{display:block;font-size:13px;color:#fff}
+    .badge span{font-size:10px;opacity:.6}
+
+    /* ============================================
+       CTA SECTION
+    ============================================ */
+    .cta-section{background:var(--bg-warm);padding:100px 20px;text-align:center;position:relative;overflow:hidden}
+    .cta-deco{position:absolute;pointer-events:none;opacity:.03}
+    .cta-deco-1{top:-80px;right:-80px;width:300px;height:300px;border:1px solid var(--accent);border-radius:50%}
+    .cta-deco-2{bottom:-60px;left:-60px;width:200px;height:200px;border:1px solid var(--accent);transform:rotate(45deg)}
+    .cta-inner{max-width:480px;margin:0 auto;position:relative;z-index:1}
+    .cta-title{font-family:var(--serif);font-size:clamp(20px,3.5vw,26px);font-weight:700;color:var(--accent);line-height:1.8;margin-bottom:24px}
+    .cta-text{font-size:14px;color:var(--text-sub);margin-bottom:40px;line-height:2.2}
+    .cta-btn{display:inline-block;background:var(--cta);color:#fff;padding:20px 56px;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.08em;border-radius:3px;transition:all .3s ease;box-shadow:0 4px 16px rgba(192,57,43,.2)}
+    .cta-btn:hover{background:var(--cta-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,57,43,.3)}
+    .cta-note{font-size:11px;color:var(--text-light);margin-top:20px}
+    .cta-safety{display:flex;justify-content:center;gap:20px;margin-top:16px;font-size:11px;color:var(--text-sub)}
+    .cta-safety-item{display:flex;align-items:center;gap:4px}
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    .footer{background:var(--bg-white);color:var(--text-sub);padding:40px 20px;text-align:center;border-top:1px solid var(--border)}
+    .footer-logo{font-family:var(--display);font-size:14px;letter-spacing:.2em;font-weight:600;margin-bottom:8px;color:var(--text-light)}
+    .footer-copy{font-size:10px;color:var(--text-light)}
+
+    /* ============================================
+       FLOATING CTA
+    ============================================ */
+    .floating-cta{position:fixed;bottom:24px;right:24px;background:var(--cta);color:#fff;padding:14px 28px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.08em;border-radius:3px;box-shadow:0 4px 20px rgba(192,57,43,.25);transition:all .3s ease;z-index:1000}
+    .floating-cta:hover{background:var(--cta-hover);transform:translateY(-1px)}
+    @media(max-width:600px){.floating-cta{bottom:16px;right:16px;left:16px;text-align:center;padding:16px 20px;font-size:14px}}
+
+    /* MID-PAGE CTA */
+    .mid-cta{text-align:center;padding:56px 20px;margin:20px 0}
+    .mid-cta-btn{display:inline-block;background:var(--cta);color:#fff;padding:16px 44px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.06em;border-radius:3px;transition:all .3s;box-shadow:0 4px 16px rgba(192,57,43,.15)}
+    .mid-cta-btn:hover{background:var(--cta-hover);transform:translateY(-2px)}
+    .mid-cta p{font-size:12px;color:var(--text-light);margin-top:12px}
+
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* ============================================
+       SCROLL ANIMATIONS
+    ============================================ */
+    /* Base hidden state */
+    .anim{opacity:0;transition:opacity .8s ease,transform .8s ease}
+
+    /* Fade up (default) */
+    .anim-up{transform:translateY(40px)}
+    .anim-up.visible{opacity:1;transform:translateY(0)}
+
+    /* Fade in (no movement) */
+    .anim-fade{transform:none}
+    .anim-fade.visible{opacity:1}
+
+    /* Scale up */
+    .anim-scale{transform:scale(.92)}
+    .anim-scale.visible{opacity:1;transform:scale(1)}
+
+    /* Slide from left */
+    .anim-left{transform:translateX(-30px)}
+    .anim-left.visible{opacity:1;transform:translateX(0)}
+
+    /* Slide from right */
+    .anim-right{transform:translateX(30px)}
+    .anim-right.visible{opacity:1;transform:translateX(0)}
+
+    /* Stagger children */
+    .stagger .anim{transition-delay:0s}
+    .stagger .anim:nth-child(1){transition-delay:.1s}
+    .stagger .anim:nth-child(2){transition-delay:.25s}
+    .stagger .anim:nth-child(3){transition-delay:.4s}
+    .stagger .anim:nth-child(4){transition-delay:.55s}
+    .stagger .anim:nth-child(5){transition-delay:.7s}
+
+    /* Hero product stagger */
+    .hero-visual .hero-prod{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .hero-visual.visible .hero-prod{opacity:1;transform:translateY(0)}
+    .hero-visual.visible .hero-prod:nth-child(1){transition-delay:.3s}
+    .hero-visual.visible .hero-prod:nth-child(2){transition-delay:.45s}
+    .hero-visual.visible .hero-prod:nth-child(3){transition-delay:.6s}
+    .hero-visual.visible .hero-prod:nth-child(4){transition-delay:.75s}
+    .hero-visual.visible .hero-prod:nth-child(5){transition-delay:.9s}
+
+    /* Counter number animation */
+    .count-up{display:inline-block}
+
+    /* Survey bar animation */
+    .sbar-fill{width:0 !important;transition:width 1.2s cubic-bezier(.25,.46,.45,.94) .3s}
+    .survey.visible .sbar-fill.hi{width:47% !important}
+    .survey.visible .sbar-fill.md{width:31% !important}
+    .survey.visible .sbar-fill.lo{width:22% !important}
+
+    /* Era diagram stagger */
+    .era-diagram .era-block,.era-diagram .era-arrow{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+    .era-diagram.visible .era-block,.era-diagram.visible .era-arrow{opacity:1;transform:translateY(0)}
+    .era-diagram.visible .era-block:nth-child(1){transition-delay:.1s}
+    .era-diagram.visible .era-arrow:nth-child(2){transition-delay:.25s}
+    .era-diagram.visible .era-block:nth-child(3){transition-delay:.4s}
+    .era-diagram.visible .era-arrow:nth-child(4){transition-delay:.55s}
+    .era-diagram.visible .era-block:nth-child(5){transition-delay:.7s}
+
+    /* Stats grid stagger */
+    .stats-grid .stat-item{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .stats-grid.visible .stat-item{opacity:1;transform:translateY(0)}
+    .stats-grid.visible .stat-item:nth-child(1){transition-delay:.15s}
+    .stats-grid.visible .stat-item:nth-child(2){transition-delay:.3s}
+    .stats-grid.visible .stat-item:nth-child(3){transition-delay:.45s}
+
+    /* Comparison stagger */
+    .compare .cmp{opacity:0;transition:opacity .6s ease,transform .6s ease}
+    .compare .cmp.neg{transform:translateX(-20px)}
+    .compare .cmp.pos{transform:translateX(20px)}
+    .compare.visible .cmp{opacity:1;transform:translateX(0)}
+    .compare.visible .cmp.neg{transition-delay:.15s}
+    .compare.visible .cmp.pos{transition-delay:.35s}
+
+    /* Disconnect diagram */
+    .disc .disc-row{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .disc.visible .disc-row{opacity:1;transform:translateY(0)}
+    .disc.visible .disc-row:nth-child(1){transition-delay:.15s}
+    .disc.visible .disc-row:nth-child(2){transition-delay:.4s}
+
+    /* Condition cards stagger */
+    .cond-grid .cond-card{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .cond-grid.visible .cond-card{opacity:1;transform:translateY(0)}
+    .cond-grid.visible .cond-card:nth-child(1){transition-delay:.1s}
+    .cond-grid.visible .cond-card:nth-child(2){transition-delay:.28s}
+    .cond-grid.visible .cond-card:nth-child(3){transition-delay:.46s}
+
+    /* Case study */
+    .case{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+    .case.visible{opacity:1;transform:translateY(0)}
+
+    /* Timeline steps */
+    .timeline .step{opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease}
+    .timeline.visible .step{opacity:1;transform:translateX(0)}
+    .timeline.visible .step:nth-child(1){transition-delay:.1s}
+    .timeline.visible .step:nth-child(2){transition-delay:.3s}
+    .timeline.visible .step:nth-child(3){transition-delay:.5s}
+    .timeline.visible .step:nth-child(4){transition-delay:.7s}
 
     /* Testimonial */
-    .testimonial {
-      background: var(--color-bg-section);
-      padding: 28px 32px;
-      margin: 24px 0;
-      border-radius: 4px;
-      position: relative;
-    }
+    .testi{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .testi.visible{opacity:1;transform:translateY(0)}
 
-    .testimonial::before {
-      content: '"';
-      font-family: var(--font-serif);
-      font-size: 48px;
-      color: var(--color-highlight);
-      position: absolute;
-      top: 12px;
-      left: 20px;
-      line-height: 1;
-      opacity: 0.5;
-    }
+    /* Awards badges */
+    .awards .badge{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+    .awards.visible .badge{opacity:1;transform:translateY(0)}
+    .awards.visible .badge:nth-child(1){transition-delay:.1s}
+    .awards.visible .badge:nth-child(2){transition-delay:.25s}
+    .awards.visible .badge:nth-child(3){transition-delay:.4s}
 
-    .testimonial-text {
-      font-size: 15px;
-      line-height: 1.8;
-      padding-left: 24px;
-      margin-bottom: 12px;
-    }
+    /* Quote */
+    .quote{opacity:0;transition:opacity 1.2s ease}
+    .quote.visible{opacity:1}
 
-    .testimonial-author {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      padding-left: 24px;
-    }
+    /* CTA section */
+    .cta-inner{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+    .cta-section.visible .cta-inner{opacity:1;transform:translateY(0)}
 
-    /* Process */
-    .process {
-      margin: 32px 0;
-    }
+    /* Company profile */
+    .profile{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .profile.visible{opacity:1;transform:translateY(0)}
 
-    .process-step {
-      display: flex;
-      gap: 20px;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--color-border);
-    }
+    /* Floating CTA: fade in after scroll */
+    .floating-cta{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;pointer-events:none}
+    .floating-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
 
-    .process-step:last-child {
-      border-bottom: none;
-    }
+    /* Mid CTA */
+    .mid-cta{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .mid-cta.visible{opacity:1;transform:translateY(0)}
 
-    .process-number {
-      width: 40px;
-      height: 40px;
-      background: var(--color-accent);
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 16px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
+    /* Highlight box */
+    .hbox{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .hbox.visible{opacity:1;transform:translateY(0)}
 
-    .process-content h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--color-accent);
-      margin-bottom: 6px;
-    }
+    /* Stat callout */
+    .stat-callout{opacity:0;transform:scale(.95);transition:opacity .7s ease,transform .7s ease}
+    .stat-callout.visible{opacity:1;transform:scale(1)}
 
-    .process-content p {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin-bottom: 0;
-    }
-
-    /* Company Section */
-    .company-section {
-      background: var(--color-accent);
-      color: #fff;
-      padding: 60px 20px;
-      margin-top: var(--spacing-section);
-    }
-
-    .company-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .company-name {
-      font-family: var(--font-serif);
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      color: var(--color-highlight);
-      margin-bottom: 16px;
-    }
-
-    .company-title {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4vw, 26px);
-      font-weight: 700;
-      line-height: 1.5;
-      margin-bottom: 28px;
-    }
-
-    .company-section p {
-      font-size: 15px;
-      line-height: 1.9;
-      opacity: 0.9;
-      margin-bottom: 20px;
-    }
-
-    .feature-list {
-      margin: 32px 0;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .feature-item:last-child {
-      border-bottom: none;
-    }
-
-    .feature-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--color-highlight);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 14px;
-      color: var(--color-accent);
-      font-weight: 700;
-    }
-
-    .feature-text h4 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .feature-text p {
-      font-size: 14px;
-      margin-bottom: 0;
-      opacity: 0.8;
-    }
-
-    /* Awards */
-    .awards {
-      display: flex;
-      gap: 24px;
-      margin: 32px 0;
-      padding: 24px 0;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      flex-wrap: wrap;
-    }
-
-    .award-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    .award-icon {
-      font-size: 18px;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      background: linear-gradient(180deg, #F5F4F0 0%, var(--color-bg) 100%);
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .cta-inner {
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4vw, 24px);
-      font-weight: 700;
-      color: var(--color-accent);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .cta-text {
-      font-size: 15px;
-      color: var(--color-text-secondary);
-      margin-bottom: 32px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background: var(--color-accent);
-      color: #fff;
-      padding: 18px 48px;
-      font-size: 15px;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      letter-spacing: 0.05em;
-    }
-
-    .cta-button:hover {
-      background: var(--color-accent-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 58, 92, 0.2);
-    }
-
-    .cta-note {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      margin-top: 16px;
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--color-accent);
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    .footer-copy {
-      font-size: 12px;
-      opacity: 0.6;
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    /* Reduce motion for accessibility */
+    @media(prefers-reduced-motion:reduce){
+      .anim,.hero-visual .hero-prod,.era-diagram .era-block,.era-diagram .era-arrow,
+      .stats-grid .stat-item,.compare .cmp,.disc .disc-row,.cond-grid .cond-card,
+      .case,.timeline .step,.testi,.awards .badge,.quote,.cta-inner,.profile,
+      .floating-cta,.mid-cta,.hbox,.stat-callout{
+        opacity:1!important;transform:none!important;transition:none!important
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-inner {
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .section {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    /* Emphasis */
-    .em {
-      background: linear-gradient(transparent 60%, rgba(196, 169, 98, 0.3) 60%);
-      padding: 0 2px;
-    }
-
-    strong {
-      font-weight: 700;
-      color: var(--color-accent);
-    }
-
-    /* Data Source */
-    .data-source {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--color-border);
-    }
-
-    /* Floating CTA */
-    .floating-cta {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--color-accent);
-      color: #fff;
-      padding: 14px 28px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 50px;
-      box-shadow: 0 4px 16px rgba(26, 58, 92, 0.3);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      letter-spacing: 0.05em;
-    }
-
-    .floating-cta:hover {
-      background: var(--color-accent-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 58, 92, 0.4);
-    }
-
-    @media (max-width: 600px) {
-      .floating-cta {
-        bottom: 16px;
-        right: 16px;
-        left: 16px;
-        text-align: center;
-        border-radius: 8px;
-        padding: 16px 20px;
-        font-size: 15px;
-      }
+      .sbar-fill{transition:none!important}
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="header">
     クラウドファンディング達成率 <span>100%</span> のプロダクトデザイン
   </header>
 
+  <!-- ==========================================
+       HERO
+  ========================================== -->
   <section class="hero">
+    <div class="hero-deco hero-deco-1"></div>
+    <div class="hero-deco hero-deco-2"></div>
+    <div class="hero-deco-dot hero-deco-dot-1"></div>
+    <div class="hero-deco-dot hero-deco-dot-2"></div>
+    <div class="hero-deco-dot hero-deco-dot-3"></div>
     <div class="hero-inner">
       <span class="hero-label">PRODUCT DESIGN</span>
       <h1 class="hero-title">
@@ -840,413 +504,522 @@
         それなのに、競合に押されている——。<br>
         その理由は「技術以外」のところにあります。
       </p>
-      <a href="#cta" class="hero-cta-button">無料相談に申し込む</a>
+      <div class="hero-visual">
+        <div class="hero-prod"><div class="hero-shape dim"></div><span class="hero-plabel">製品A</span></div>
+        <div class="hero-prod"><div class="hero-shape dim"></div><span class="hero-plabel">製品B</span></div>
+        <div class="hero-prod"><div class="hero-shape sel"></div><span class="hero-plabel hl">選ばれる</span></div>
+        <div class="hero-prod"><div class="hero-shape dim"></div><span class="hero-plabel">製品D</span></div>
+        <div class="hero-prod"><div class="hero-shape dim"></div><span class="hero-plabel">製品E</span></div>
+      </div>
+      <a href="#cta" class="hero-cta">無料相談に申し込む</a>
     </div>
   </section>
 
   <article class="article">
 
+    <!-- ==========================================
+         01: 消費者の本音
+    ========================================== -->
     <section class="section">
-      <span class="section-number">01</span>
-      <h2 class="section-title">消費者の本音：<br>「デザインで買うのをやめたことがある」</h2>
-      
-      <p>
-        まず、ある調査結果をご覧ください。
-      </p>
+      <span class="snum">01</span>
+      <h2 class="stitle">消費者の本音：<br>「デザインで買うのをやめたことがある」</h2>
+      <p>まず、ある調査結果をご覧ください。</p>
 
-      <div class="survey-box">
-        <div class="survey-header">
+      <div class="survey">
+        <div class="survey-hd">
           <div class="survey-icon">📊</div>
-          <div class="survey-meta">
-            <strong>消費者購買行動調査 2024</strong>
-            全国20〜60代男女 1,200名対象
-          </div>
+          <div class="survey-meta"><strong>消費者購買行動調査 2024</strong>全国20〜60代男女 1,200名対象</div>
         </div>
-        <p class="survey-question">
-          Q. 機能や価格に問題がないのに、「デザイン（見た目）」が理由で<br>
-          購入をやめた経験はありますか？
-        </p>
-        <div class="survey-results">
-          <div class="survey-bar">
-            <span class="survey-label">ある（何度もある）</span>
-            <div class="survey-bar-container">
-              <div class="survey-bar-fill high" style="width: 47%;">47%</div>
-            </div>
-          </div>
-          <div class="survey-bar">
-            <span class="survey-label">ある（1〜2回）</span>
-            <div class="survey-bar-container">
-              <div class="survey-bar-fill medium" style="width: 31%;">31%</div>
-            </div>
-          </div>
-          <div class="survey-bar">
-            <span class="survey-label">ない</span>
-            <div class="survey-bar-container">
-              <div class="survey-bar-fill low" style="width: 22%;">22%</div>
-            </div>
-          </div>
+        <p class="survey-q">Q. 機能や価格に問題がないのに、「デザイン（見た目）」が理由で購入をやめた経験はありますか？</p>
+        <div class="survey-bars">
+          <div class="sbar"><span class="sbar-label">ある（何度もある）</span><div class="sbar-track"><div class="sbar-fill hi" style="width:47%">47%</div></div></div>
+          <div class="sbar"><span class="sbar-label">ある（1〜2回）</span><div class="sbar-track"><div class="sbar-fill md" style="width:31%">31%</div></div></div>
+          <div class="sbar"><span class="sbar-label">ない</span><div class="sbar-track"><div class="sbar-fill lo" style="width:22%">22%</div></div></div>
         </div>
-        <p class="survey-source">※ 2024年 Javasparrow調べ（インターネット調査）</p>
+        <p class="survey-src">※ 2024年 Javasparrow調べ（インターネット調査）</p>
       </div>
 
-      <p>
-        <span class="em">実に78%の消費者が「デザインが理由で購入をやめた経験がある」</span>と回答しています。
-      </p>
-      <p>
-        つまり、どれだけ機能が優れていても、どれだけ価格が適正でも、デザインの印象が悪ければ——消費者は買わないのです。
-      </p>
+      <div class="stat-callout">
+        <div class="stat-big"><span data-count="78" data-suffix="%">0%</span></div>
+        <div class="stat-callout-text"><span class="em">実に78%の消費者が「デザインが理由で購入をやめた経験がある」</span>と回答。どれだけ機能が優れていても、デザインの印象が悪ければ——消費者は買わないのです。</div>
+      </div>
     </section>
 
+    <!-- ==========================================
+         02: 時代の変化
+    ========================================== -->
     <section class="section">
-      <span class="section-number">02</span>
-      <h2 class="section-title">「良いものを作れば売れる」<br>時代は、静かに終わった</h2>
-      
-      <p>
-        かつて、製品の勝敗は「機能」と「品質」で決まりました。より高性能なもの、より丈夫なもの、より精度の高いものが選ばれる。技術力のある会社が正当に評価される時代でした。
-      </p>
-      <p>
-        しかし今、市場には同等の機能を持つ製品があふれています。海外メーカーも技術力をつけ、価格では勝負にならない。<span class="em">機能で差がつかなくなった今、何が「選ばれる理由」になるのでしょうか。</span>
-      </p>
+      <span class="snum">02</span>
+      <h2 class="stitle">「良いものを作れば売れる」<br>時代は、静かに終わった</h2>
+      <p>かつて、製品の勝敗は「機能」と「品質」で決まりました。より高性能なもの、より丈夫なもの、より精度の高いものが選ばれる。技術力のある会社が正当に評価される時代でした。</p>
+      <p>しかし今、市場には同等の機能を持つ製品があふれています。海外メーカーも技術力をつけ、価格では勝負にならない。<span class="em">機能で差がつかなくなった今、何が「選ばれる理由」になるのでしょうか。</span></p>
+
+      <div class="era-diagram">
+        <div class="era-block past"><div class="era-icon">⚙️</div><h4>機能の時代</h4><p>スペックで勝負</p></div>
+        <div class="era-arrow">→</div>
+        <div class="era-block past"><div class="era-icon">💰</div><h4>価格の時代</h4><p>安さで勝負</p></div>
+        <div class="era-arrow">→</div>
+        <div class="era-block now"><div class="era-icon">✦</div><h4>デザインの時代</h4><p>印象で選ばれる</p></div>
+      </div>
 
       <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">78<span>%</span></div>
-          <div class="stat-label">デザインで購入をやめた経験がある消費者</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">3<span>秒</span></div>
-          <div class="stat-label">消費者が製品の第一印象を決める時間</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">2.3<span>倍</span></div>
-          <div class="stat-label">デザイン投資企業の売上成長率※</div>
-        </div>
+        <div class="stat-item"><div class="stat-num"><span data-count="78" data-suffix="">0</span><span>%</span></div><div class="stat-lbl">デザインで購入をやめた<br>経験がある消費者</div></div>
+        <div class="stat-item"><div class="stat-num"><span data-count="3" data-suffix="">0</span><span>秒</span></div><div class="stat-lbl">消費者が製品の<br>第一印象を決める時間</div></div>
+        <div class="stat-item"><div class="stat-num"><span data-count="2.3" data-suffix="">0</span><span>倍</span></div><div class="stat-lbl">デザイン投資企業の<br>売上成長率※</div></div>
       </div>
+      <p class="data-src">※ McKinsey「The Business Value of Design」(2018) より。デザインを経営に活用する上位25%の企業は、業界平均の2.3倍の売上成長率を記録。</p>
 
-      <p class="data-source">※ McKinsey「The Business Value of Design」(2018) より。デザインを経営に活用する上位25%の企業は、業界平均の2.3倍の売上成長率を記録。</p>
-
-      <div class="quote">
-        同じ機能、同じ品質。<br>
-        それでも「選ばれる製品」と「埋もれる製品」がある。<br>
-        その違いは、どこにあるのか。
-      </div>
+      <div class="quote">同じ機能、同じ品質。<br>それでも「選ばれる製品」と「埋もれる製品」がある。<br>その違いは、どこにあるのか。</div>
     </section>
 
-    <section class="section">
-      <span class="section-number">03</span>
-      <h2 class="section-title">多くの企業が見落としている<br>「デザイン」の本当の意味</h2>
-      
-      <p>
-        「デザイン」と聞くと、多くの方が「見た目を整えること」を想像します。色を変える、形をきれいにする、パッケージをおしゃれにする——。
-      </p>
-      <p>
-        しかし、<strong>本来のデザインとは、製品の価値を正しく伝え、選ばれる理由を作ること</strong>です。
-      </p>
+    <!-- MID CTA -->
+    <div class="mid-cta">
+      <a href="#cta" class="mid-cta-btn">デザインで変える方法を聞く</a>
+      <p>※ 無料・オンライン対応</p>
+    </div>
 
-      <div class="comparison">
-        <div class="comparison-item negative">
-          <span class="comparison-label">見た目だけのデザイン</span>
+    <!-- ==========================================
+         03: デザインの本当の意味
+    ========================================== -->
+    <section class="section">
+      <span class="snum">03</span>
+      <h2 class="stitle">多くの企業が見落としている<br>「デザイン」の本当の意味</h2>
+      <p>「デザイン」と聞くと、多くの方が「見た目を整えること」を想像します。色を変える、形をきれいにする、パッケージをおしゃれにする——。</p>
+      <p>しかし、<strong>本来のデザインとは、製品の価値を正しく伝え、選ばれる理由を作ること</strong>です。</p>
+
+      <div class="compare">
+        <div class="cmp neg">
+          <div class="cmp-icon">✕</div>
+          <span class="cmp-label">見た目だけのデザイン</span>
           <h4>表面を整える</h4>
           <p>色や形を変えるだけ。製品の本質的な価値は変わらない。</p>
         </div>
-        <div class="comparison-item positive">
-          <span class="comparison-label">売れるデザイン</span>
+        <div class="cmp pos">
+          <div class="cmp-icon">◎</div>
+          <span class="cmp-label">売れるデザイン</span>
           <h4>価値を伝える</h4>
           <p>誰に、何を、どう伝えるかを設計し、選ばれる理由を作る。</p>
         </div>
       </div>
 
-      <p>
-        御社の製品には、長年培った技術と品質があるはずです。問題は、<span class="em">その価値が顧客に正しく伝わっていない</span>こと。これは技術の問題ではなく、「伝え方」の問題です。
-      </p>
+      <p>御社の製品には、長年培った技術と品質があるはずです。問題は、<span class="em">その価値が顧客に正しく伝わっていない</span>こと。これは技術の問題ではなく、「伝え方」の問題です。</p>
 
-      <div class="highlight-box">
-        <p>
-          <strong>人は「機能」で比較し、「印象」で決める。</strong><br><br>
-          同じ機能なら、「なんとなく良さそう」な方が選ばれます。この「なんとなく」を設計するのが、本来のデザインです。
-        </p>
-      </div>
+      <div class="hbox"><p><strong>人は「機能」で比較し、「印象」で決める。</strong><br><br>同じ機能なら、「なんとなく良さそう」な方が選ばれます。この「なんとなく」を設計するのが、本来のデザインです。</p></div>
     </section>
 
+    <!-- ==========================================
+         04: 外注の失敗
+    ========================================== -->
     <section class="section">
-      <span class="section-number">04</span>
-      <h2 class="section-title">なぜ、デザインを外注しても<br>うまくいかないのか</h2>
-      
-      <p>
-        「それなら、デザインを外注すればいい」——そう考える方も多いでしょう。しかし、多くの企業がデザイン外注で失敗しています。
-      </p>
+      <span class="snum">04</span>
+      <h2 class="stitle">なぜ、デザインを外注しても<br>うまくいかないのか</h2>
+      <p>「それなら、デザインを外注すればいい」——そう考える方も多いでしょう。しかし、多くの企業がデザイン外注で失敗しています。</p>
 
-      <div class="highlight-box">
-        <p>
-          <strong>よくある失敗パターン</strong><br><br>
-          ・クラウドソーシングで安く依頼 → 製造を知らないデザイナーが、作れないデザインを上げてくる<br><br>
-          ・海外工場のデザイナーに依頼 → 品質やブランドイメージが意図と違う<br><br>
-          ・デザイン会社に依頼 → きれいなデザインは上がるが、量産したら品質が落ちる
-        </p>
-      </div>
+      <div class="hbox"><p><strong>よくある失敗パターン</strong><br><br>・クラウドソーシングで安く依頼 → 製造を知らないデザイナーが、作れないデザインを上げてくる<br><br>・海外工場のデザイナーに依頼 → 品質やブランドイメージが意図と違う<br><br>・デザイン会社に依頼 → きれいなデザインは上がるが、量産したら品質が落ちる</p></div>
 
-      <p>
-        これらの失敗には共通点があります。<strong>デザインと製造が分断されている</strong>ということです。
-      </p>
-      <p>
-        デザイナーは「絵を描く人」、製造は「作る人」。この分業が当たり前になっていますが、実はここに大きな落とし穴があります。
-      </p>
-      <p>
-        <span class="em">デザイナーが製造を理解していなければ、量産で品質は必ず落ちます。</span>どれだけ美しいデザインでも、製造工程で妥協が入れば、最終製品は意図したものになりません。
-      </p>
+      <p>これらの失敗には共通点があります。<strong>デザインと製造が分断されている</strong>ということです。</p>
 
-      <div class="testimonial">
-        <p class="testimonial-text">
-          以前、別のデザイン会社に依頼したことがあります。デザイン案は良かったのですが、いざ量産してみると「この素材では再現できない」「コストが合わない」と言われ、結局まったく違うものになりました。
-        </p>
-        <p class="testimonial-author">— 精密機器メーカー 開発部長</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <span class="section-number">05</span>
-      <h2 class="section-title">「売れるデザイン」に必要な<br>3つの条件</h2>
-      
-      <p>
-        では、製品を「選ばれる製品」に変えるデザインには、何が必要なのでしょうか。
-      </p>
-
-      <div class="highlight-box">
-        <p>
-          <strong>条件1：マーケティング視点</strong><br>
-          誰が、どんな場面で、なぜこの製品を選ぶのか。ターゲットの購買心理を理解した上でデザインする。<br><br>
-          <strong>条件2：製造への深い理解</strong><br>
-          素材の特性、加工の制約、コストと品質のバランス。製造を熟知していなければ、デザインは「絵に描いた餅」になる。<br><br>
-          <strong>条件3：初期から量産までの一貫したフォロー</strong><br>
-          デザインを納品して終わりではない。量産で品質が落ちないよう、最後まで責任を持つ。
-        </p>
-      </div>
-
-      <p>
-        この3つが揃って初めて、「売れるデザイン」が実現します。しかし、この3つを満たせるデザイナーは、実はほとんどいません。
-      </p>
-    </section>
-
-    <section class="section">
-      <span class="section-number">06</span>
-      <h2 class="section-title">デザインで変わった製品の実例</h2>
-      
-      <div class="case-study">
-        <span class="case-study-label">CASE STUDY 01</span>
-        <h3 class="case-study-title">ZitA SQUARE｜自動開閉ゴミ箱</h3>
-        <p>
-          自動開閉ゴミ箱「ZitA」シリーズの新モデル。機能だけでなく、「インテリアに溶け込むデザイン」という価値を加えることで、価格競争から脱却。
-        </p>
-        <p>
-          量産を前提とした設計、製造工程での品質管理まで一貫して行うことで、デザインの意図を最終製品まで反映。クラウドファンディングで大きな支持を集めました。
-        </p>
-        <div class="case-study-stats">
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">1,847<span>%</span></div>
-            <div class="case-study-stat-label">目標達成率</div>
+      <div class="disc">
+        <div class="disc-row bad">
+          <div class="disc-label">従来</div>
+          <div class="disc-nodes">
+            <div class="disc-node">デザイナー</div>
+            <div class="disc-break">✕</div>
+            <div class="disc-node">製造現場</div>
+            <div class="disc-arr">→</div>
+            <div class="disc-node">品質低下</div>
           </div>
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">2,340<span>万円</span></div>
-            <div class="case-study-stat-label">調達金額</div>
-          </div>
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">1,892<span>人</span></div>
-            <div class="case-study-stat-label">支援者数</div>
+        </div>
+        <div class="disc-row good">
+          <div class="disc-label">理想</div>
+          <div class="disc-nodes">
+            <div class="disc-node">デザイン</div>
+            <div class="disc-arr">⇄</div>
+            <div class="disc-node">製造知識</div>
+            <div class="disc-arr">→</div>
+            <div class="disc-node">意図通りの製品</div>
           </div>
         </div>
       </div>
 
-      <div class="case-study">
-        <span class="case-study-label">CASE STUDY 02</span>
-        <h3 class="case-study-title">某計測機器メーカー｜業務用センサー</h3>
-        <p>
-          創業40年の計測機器メーカー。技術力には定評があったが、「見た目が古い」「競合の海外製品に見劣りする」という声が営業現場から上がっていた。
-        </p>
-        <p>
-          機能はそのままに、筐体デザインを刷新。展示会での反応が大きく変わり、商談数が増加。「技術だけでなく、信頼感が伝わるようになった」と評価。
-        </p>
-        <div class="case-study-stats">
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">2.4<span>倍</span></div>
-            <div class="case-study-stat-label">展示会での名刺獲得数</div>
-          </div>
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">168<span>%</span></div>
-            <div class="case-study-stat-label">リニューアル後の売上（前年比）</div>
-          </div>
-        </div>
-      </div>
+      <p>デザイナーは「絵を描く人」、製造は「作る人」。この分業が当たり前になっていますが、実はここに大きな落とし穴があります。</p>
+      <p><span class="em">デザイナーが製造を理解していなければ、量産で品質は必ず落ちます。</span>どれだけ美しいデザインでも、製造工程で妥協が入れば、最終製品は意図したものになりません。</p>
 
-      <div class="case-study">
-        <span class="case-study-label">CASE STUDY 03</span>
-        <h3 class="case-study-title">某工具メーカー｜電動工具シリーズ</h3>
-        <p>
-          職人向け電動工具を製造する老舗メーカー。「使いやすさ」は評価されていたが、若い職人へのアプローチに課題を感じていた。
-        </p>
-        <p>
-          ターゲットを明確にし、「プロが選ぶ道具」としてのブランドイメージを再構築。デザインだけでなく、パッケージ、カタログまで一貫したトーンで制作。
-        </p>
-        <div class="case-study-stats">
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">35<span>歳↓</span></div>
-            <div class="case-study-stat-label">購入者平均年齢の若返り</div>
-          </div>
-          <div class="case-study-stat">
-            <div class="case-study-stat-number">142<span>%</span></div>
-            <div class="case-study-stat-label">EC売上（前年比）</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial">
-        <p class="testimonial-text">
-          正直、デザインでここまで変わるとは思っていませんでした。展示会で「御社の製品、雰囲気変わりましたね」と言われることが増えました。技術は変わっていないのに、お客様の反応がまるで違う。
-        </p>
-        <p class="testimonial-author">— 計測機器メーカー 代表取締役</p>
-      </div>
-
-      <div class="testimonial">
-        <p class="testimonial-text">
-          量産の段階まで一緒に見てもらえるのが決め手でした。以前は「デザイン通りにならない」ことが多かったのですが、今回は最後まで意図した通りの製品ができました。
-        </p>
-        <p class="testimonial-author">— 工具メーカー 商品企画部</p>
+      <div class="testi">
+        <p class="testi-text">以前、別のデザイン会社に依頼したことがあります。デザイン案は良かったのですが、いざ量産してみると「この素材では再現できない」「コストが合わない」と言われ、結局まったく違うものになりました。</p>
+        <p class="testi-author">— 精密機器メーカー 開発部長</p>
       </div>
     </section>
 
+    <!-- ==========================================
+         05: 3つの条件
+    ========================================== -->
     <section class="section">
-      <span class="section-number">07</span>
-      <h2 class="section-title">プロジェクトの進め方</h2>
-      
-      <p>
-        「デザインを頼むのは初めて」という方も多いと思います。どのように進めるのか、流れをご説明します。
-      </p>
+      <span class="snum">05</span>
+      <h2 class="stitle">「売れるデザイン」に必要な<br>3つの条件</h2>
+      <p>では、製品を「選ばれる製品」に変えるデザインには、何が必要なのでしょうか。</p>
 
-      <div class="process">
-        <div class="process-step">
-          <div class="process-number">1</div>
-          <div class="process-content">
+      <div class="cond-grid">
+        <div class="cond-card">
+          <div class="cond-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 8v4m-4 4h8c0-2.2-1.8-4-4-4s-4 1.8-4 4z"/><path d="M20 20H4"/></svg></div>
+          <div class="cond-num">CONDITION 01</div>
+          <div class="cond-title">マーケティング視点</div>
+          <div class="cond-desc">ターゲットの購買心理を理解した上でデザインする</div>
+        </div>
+        <div class="cond-card">
+          <div class="cond-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div>
+          <div class="cond-num">CONDITION 02</div>
+          <div class="cond-title">製造への深い理解</div>
+          <div class="cond-desc">素材・加工・コストを熟知した実現可能なデザイン</div>
+        </div>
+        <div class="cond-card">
+          <div class="cond-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="cond-num">CONDITION 03</div>
+          <div class="cond-title">量産まで一貫フォロー</div>
+          <div class="cond-desc">納品で終わらず、最後まで品質に責任を持つ</div>
+        </div>
+      </div>
+
+      <p>この3つが揃って初めて、「売れるデザイン」が実現します。しかし、この3つを満たせるデザイナーは、実はほとんどいません。</p>
+    </section>
+
+    <!-- ==========================================
+         06: 事例
+    ========================================== -->
+    <section class="section">
+      <span class="snum">06</span>
+      <h2 class="stitle">デザインで変わった製品の実例</h2>
+
+      <!-- Case 1: ZitA -->
+      <div class="case">
+        <!-- PLACEHOLDER: ZitA SQUARE product photo — 720×240px, product on clean bg or lifestyle -->
+        <div class="case-img">
+          <div class="case-img-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="case-img-spec">製品写真を配置<br>推奨: 720×240px / プロダクト写真 or 利用シーン</div>
+        </div>
+        <div class="case-body">
+          <span class="case-label">CASE STUDY 01</span>
+          <h3 class="case-title">ZitA SQUARE｜自動開閉ゴミ箱</h3>
+          <p>自動開閉ゴミ箱「ZitA」シリーズの新モデル。機能だけでなく、「インテリアに溶け込むデザイン」という価値を加えることで、価格競争から脱却。</p>
+          <p>量産を前提とした設計、製造工程での品質管理まで一貫して行うことで、デザインの意図を最終製品まで反映。クラウドファンディングで大きな支持を集めました。</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="case-stat-num"><span data-count="1847" data-suffix="">0</span><span>%</span></div><div class="case-stat-lbl">目標達成率</div></div>
+            <div class="case-stat"><div class="case-stat-num"><span data-count="2340" data-suffix="">0</span><span>万円</span></div><div class="case-stat-lbl">調達金額</div></div>
+            <div class="case-stat"><div class="case-stat-num"><span data-count="1892" data-suffix="">0</span><span>人</span></div><div class="case-stat-lbl">支援者数</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 2: Sensor -->
+      <div class="case">
+        <!-- PLACEHOLDER: Measurement sensor — 720×240px, before/after or product shot -->
+        <div class="case-img">
+          <div class="case-img-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="case-img-spec">製品写真を配置<br>推奨: 720×240px / Before→After or 展示会写真</div>
+        </div>
+        <div class="case-body">
+          <span class="case-label">CASE STUDY 02</span>
+          <h3 class="case-title">某計測機器メーカー｜業務用センサー</h3>
+          <p>創業40年の計測機器メーカー。技術力には定評があったが、「見た目が古い」「競合の海外製品に見劣りする」という声が営業現場から上がっていた。</p>
+          <p>機能はそのままに、筐体デザインを刷新。展示会での反応が大きく変わり、商談数が増加。「技術だけでなく、信頼感が伝わるようになった」と評価。</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="case-stat-num"><span data-count="2.4" data-suffix="">0</span><span>倍</span></div><div class="case-stat-lbl">展示会での名刺獲得数</div></div>
+            <div class="case-stat"><div class="case-stat-num"><span data-count="168" data-suffix="">0</span><span>%</span></div><div class="case-stat-lbl">リニューアル後の売上（前年比）</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 3: Power tools -->
+      <div class="case">
+        <!-- PLACEHOLDER: Power tools — 720×240px, lineup or usage scene -->
+        <div class="case-img">
+          <div class="case-img-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="case-img-spec">製品写真を配置<br>推奨: 720×240px / 製品ラインナップ or 利用シーン</div>
+        </div>
+        <div class="case-body">
+          <span class="case-label">CASE STUDY 03</span>
+          <h3 class="case-title">某工具メーカー｜電動工具シリーズ</h3>
+          <p>職人向け電動工具を製造する老舗メーカー。「使いやすさ」は評価されていたが、若い職人へのアプローチに課題を感じていた。</p>
+          <p>ターゲットを明確にし、「プロが選ぶ道具」としてのブランドイメージを再構築。デザインだけでなく、パッケージ、カタログまで一貫したトーンで制作。</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="case-stat-num"><span data-count="35" data-suffix="">0</span><span>歳↓</span></div><div class="case-stat-lbl">購入者平均年齢の若返り</div></div>
+            <div class="case-stat"><div class="case-stat-num"><span data-count="142" data-suffix="">0</span><span>%</span></div><div class="case-stat-lbl">EC売上（前年比）</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi">
+        <p class="testi-text">正直、デザインでここまで変わるとは思っていませんでした。展示会で「御社の製品、雰囲気変わりましたね」と言われることが増えました。技術は変わっていないのに、お客様の反応がまるで違う。</p>
+        <p class="testi-author">— 計測機器メーカー 代表取締役</p>
+      </div>
+      <div class="testi">
+        <p class="testi-text">量産の段階まで一緒に見てもらえるのが決め手でした。以前は「デザイン通りにならない」ことが多かったのですが、今回は最後まで意図した通りの製品ができました。</p>
+        <p class="testi-author">— 工具メーカー 商品企画部</p>
+      </div>
+    </section>
+
+    <!-- MID CTA -->
+    <div class="mid-cta">
+      <a href="#cta" class="mid-cta-btn">事例の詳細を聞く</a>
+      <p>※ 無料・押し売りなし</p>
+    </div>
+
+    <!-- ==========================================
+         07: プロジェクトの進め方
+    ========================================== -->
+    <section class="section">
+      <span class="snum">07</span>
+      <h2 class="stitle">プロジェクトの進め方</h2>
+      <p>「デザインを頼むのは初めて」という方も多いと思います。どのように進めるのか、流れをご説明します。</p>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
             <h4>ヒアリング・現状分析</h4>
             <p>御社の製品、技術的な強み、競合状況、課題をお聞きします。ターゲットとなる顧客像を一緒に明確にします。</p>
+            <span class="step-dur">約2週間</span>
           </div>
         </div>
-        <div class="process-step">
-          <div class="process-number">2</div>
-          <div class="process-content">
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
             <h4>コンセプト設計</h4>
             <p>「誰に、何を、どう伝えるか」を設計します。デザインの方向性を複数案ご提示し、議論しながら決定します。</p>
+            <span class="step-dur">約2〜3週間</span>
           </div>
         </div>
-        <div class="process-step">
-          <div class="process-number">3</div>
-          <div class="process-content">
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
             <h4>デザイン制作</h4>
             <p>量産を前提とした設計を行います。素材、加工方法、コストを考慮しながら、実現可能なデザインを制作します。</p>
+            <span class="step-dur">約3〜4週間</span>
           </div>
         </div>
-        <div class="process-step">
-          <div class="process-number">4</div>
-          <div class="process-content">
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
             <h4>量産フォロー</h4>
             <p>デザイン納品で終わりではありません。試作確認、製造工場との調整、品質チェックまで責任を持って伴走します。</p>
+            <span class="step-dur">製品により変動</span>
           </div>
         </div>
       </div>
 
-      <div class="highlight-box">
-        <p>
-          <strong>期間・費用の目安</strong><br><br>
-          期間：2〜3ヶ月（製品の複雑さにより変動）<br>
-          費用：月額25万円〜<br><br>
-          ※ 詳細は無料相談にてお見積りいたします。
-        </p>
-      </div>
+      <div class="hbox"><p><strong>期間・費用の目安</strong><br><br>期間：2〜3ヶ月（製品の複雑さにより変動）<br>費用：月額25万円〜<br><br>※ 詳細は無料相談にてお見積りいたします。</p></div>
     </section>
 
   </article>
 
-  <section class="company-section">
+  <!-- ==========================================
+       COMPANY
+  ========================================== -->
+  <section class="company">
     <div class="company-inner">
       <p class="company-name">JAVASPARROW</p>
-      <h2 class="company-title">
-        デザインから量産まで。<br>
-        製品を「売れる商品」に変える、<br>
-        プロダクトデザイン。
-      </h2>
-      
-      <p>
-        Javasparrowは、中小企業の製品を「選ばれる商品」に変えるプロダクトデザイン会社です。
-      </p>
-      <p>
-        Panasonicでのテレビ等の製品開発経験を持つデザイナーが、マーケティング視点と製造知識を活かし、御社の技術力を「売れる力」に変えます。
-      </p>
+      <h2 class="company-title">デザインから量産まで。<br>製品を「売れる商品」に変える、<br>プロダクトデザイン。</h2>
+      <p>Javasparrowは、中小企業の製品を「選ばれる商品」に変えるプロダクトデザイン会社です。</p>
 
-      <div class="feature-list">
-        <div class="feature-item">
-          <div class="feature-icon">1</div>
-          <div class="feature-text">
-            <h4>マーケティング視点のデザイン</h4>
-            <p>ターゲットの購買心理を理解し、選ばれる理由を設計します。</p>
-          </div>
+      <!-- Representative photo placeholder -->
+      <div class="profile">
+        <!-- PLACEHOLDER: 代表写真 80×80px circle headshot -->
+        <div class="profile-photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="profile-info">
+          <div class="profile-name">代表デザイナー</div>
+          <div class="profile-role">元Panasonic プロダクトデザイナー</div>
+          <p style="margin-top:8px;opacity:.8">Panasonicでのテレビ等の製品開発経験を持つデザイナーが、マーケティング視点と製造知識を活かし、御社の技術力を「売れる力」に変えます。</p>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon">2</div>
-          <div class="feature-text">
-            <h4>製造を熟知したプロの視点</h4>
-            <p>モノの原理と製造方法を理解し、作れないデザインは提案しません。</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">3</div>
-          <div class="feature-text">
-            <h4>初期から量産まで一貫フォロー</h4>
-            <p>デザイン納品で終わりではなく、量産まで責任を持って伴走します。</p>
-          </div>
-        </div>
+      </div>
+
+      <div class="feat-list">
+        <div class="feat"><div class="feat-icon">1</div><div><h4>マーケティング視点のデザイン</h4><p>ターゲットの購買心理を理解し、選ばれる理由を設計します。</p></div></div>
+        <div class="feat"><div class="feat-icon">2</div><div><h4>製造を熟知したプロの視点</h4><p>モノの原理と製造方法を理解し、作れないデザインは提案しません。</p></div></div>
+        <div class="feat"><div class="feat-icon">3</div><div><h4>初期から量産まで一貫フォロー</h4><p>デザイン納品で終わりではなく、量産まで責任を持って伴走します。</p></div></div>
       </div>
 
       <div class="awards">
-        <div class="award-item">
-          <span class="award-icon">🏆</span>
-          グッドデザイン賞 受賞
-        </div>
-        <div class="award-item">
-          <span class="award-icon">📺</span>
-          日経デザイン 掲載
-        </div>
-        <div class="award-item">
-          <span class="award-icon">✓</span>
-          クラファン達成率 100%
-        </div>
+        <div class="badge"><div class="badge-icon">🏆</div><div><strong>グッドデザイン賞</strong><span>受賞</span></div></div>
+        <div class="badge"><div class="badge-icon">📺</div><div><strong>日経デザイン</strong><span>掲載</span></div></div>
+        <div class="badge"><div class="badge-icon">✓</div><div><strong>クラファン達成率</strong><span>100%</span></div></div>
       </div>
 
-      <p>
-        この実績が、「売れるデザイン」の証明です。
-      </p>
+      <p>この実績が、「売れるデザイン」の証明です。</p>
     </div>
   </section>
 
+  <!-- ==========================================
+       CTA
+  ========================================== -->
   <section class="cta-section" id="cta">
+    <div class="cta-deco cta-deco-1"></div>
+    <div class="cta-deco cta-deco-2"></div>
     <div class="cta-inner">
-      <h2 class="cta-title">
-        まずは、御社の製品について<br>
-        お聞かせください。
-      </h2>
-      <p class="cta-text">
-        無料相談では、御社の製品と課題をヒアリングし、<br>
-        デザインでどう変えられるかをご提案します。<br>
-        押し売りは一切ありません。
-      </p>
-      <a href="#" class="cta-button">無料相談に申し込む</a>
+      <h2 class="cta-title">まずは、御社の製品について<br>お聞かせください。</h2>
+      <p class="cta-text">無料相談では、御社の製品と課題をヒアリングし、<br>デザインでどう変えられるかをご提案します。<br>押し売りは一切ありません。</p>
+      <a href="#" class="cta-btn">無料相談に申し込む</a>
       <p class="cta-note">※ 相談は無料です。オンラインでも対応可能です。</p>
+      <div class="cta-safety">
+        <div class="cta-safety-item">✓ 無料</div>
+        <div class="cta-safety-item">✓ オンライン対応</div>
+        <div class="cta-safety-item">✓ 押し売りなし</div>
+      </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <p class="footer-logo">JAVASPARROW</p>
     <p class="footer-copy">© Javasparrow Inc. All Rights Reserved.</p>
   </footer>
 
   <a href="#cta" class="floating-cta">無料相談はこちら</a>
+
+  <script>
+  (function(){
+    // ==========================================
+    // Intersection Observer — trigger .visible
+    // ==========================================
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -60px 0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          // Count-up numbers inside this element
+          entry.target.querySelectorAll('[data-count]').forEach(countUp);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Elements to observe
+    const selectors = [
+      '.hero-visual',
+      '.survey',
+      '.stat-callout',
+      '.era-diagram',
+      '.stats-grid',
+      '.compare',
+      '.disc',
+      '.cond-grid',
+      '.case',
+      '.timeline',
+      '.testi',
+      '.awards',
+      '.quote',
+      '.cta-section',
+      '.profile',
+      '.mid-cta',
+      '.hbox',
+      '.stitle',
+      '.section > p'
+    ];
+
+    // Also observe generic .anim elements
+    document.querySelectorAll('.anim').forEach(function(el){ observer.observe(el); });
+    selectors.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){ observer.observe(el); });
+    });
+
+    // Section titles and paragraphs: add anim classes
+    document.querySelectorAll('.stitle').forEach(function(el){
+      if(!el.classList.contains('anim')){
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity .7s ease, transform .7s ease';
+      }
+    });
+    // Re-observe stitle with visible logic
+    const titleObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          titleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.stitle').forEach(function(el){ titleObserver.observe(el); });
+
+    // Section number labels
+    document.querySelectorAll('.snum').forEach(function(el){
+      el.style.opacity = '0';
+      el.style.transition = 'opacity .6s ease .1s';
+    });
+    const snumObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.style.opacity = '1';
+          snumObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.snum').forEach(function(el){ snumObserver.observe(el); });
+
+    // ==========================================
+    // Count-up animation
+    // ==========================================
+    const counted = new Set();
+    function countUp(el){
+      if(counted.has(el)) return;
+      counted.add(el);
+      const target = parseFloat(el.getAttribute('data-count'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      const prefix = el.getAttribute('data-prefix') || '';
+      const decimals = (target % 1 !== 0) ? 1 : 0;
+      const duration = 1200;
+      const startTime = performance.now();
+
+      function update(now){
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = (target * eased).toFixed(decimals);
+        el.textContent = prefix + formatNumber(current) + suffix;
+        if(progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    function formatNumber(n){
+      const parts = n.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.');
+    }
+
+    // ==========================================
+    // Floating CTA: show after scrolling past hero
+    // ==========================================
+    var floatingCTA = document.querySelector('.floating-cta');
+    var heroSection = document.querySelector('.hero');
+    function checkFloatingCTA(){
+      if(!heroSection || !floatingCTA) return;
+      var heroBottom = heroSection.getBoundingClientRect().bottom;
+      if(heroBottom < 0){
+        floatingCTA.classList.add('show');
+      } else {
+        floatingCTA.classList.remove('show');
+      }
+    }
+    window.addEventListener('scroll', checkFloatingCTA, {passive:true});
+    checkFloatingCTA();
+
+    // ==========================================
+    // Hero: trigger visual animation after load
+    // ==========================================
+    setTimeout(function(){
+      var hv = document.querySelector('.hero-visual');
+      if(hv) hv.classList.add('visible');
+    }, 600);
+
+  })();
+  </script>
 
 </body>
 </html>
